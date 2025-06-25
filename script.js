@@ -39,3 +39,4 @@ function checkAnswer() {
     notice.style.color = "red";
     notice.style.fontWeight = "bold";
   }
+}

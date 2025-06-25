@@ -20,12 +20,13 @@ function checkAnswer() {
   const notice = document.getElementById("notice");
   const reward = document.getElementById("reward");
 
-  // ✅ Normalisasi jawaban benar sebagai array
+  // ✅ Normalisasi jawaban benar sebagai array lowercase
   const correctAnswers = Array.isArray(quizData.answer)
     ? quizData.answer.map(a => a.trim().toLowerCase())
     : [quizData.answer.trim().toLowerCase()];
 
   if (correctAnswers.includes(userAnswer)) {
+    // ✅ Jawaban benar
     notice.innerText = "";
     reward.style.display = "block";
     reward.innerHTML = `
@@ -33,10 +34,14 @@ function checkAnswer() {
       <br><a href="${quizData.rewardLink}" target="_blank">🎁 Ambil Hadiah</a>
     `;
   } else {
+    // ❌ Jawaban salah
     reward.style.display = "none";
     notice.innerText = "Jawaban Salah!";
     notice.style.display = "block";
     notice.style.color = "red";
     notice.style.fontWeight = "bold";
   }
+
+  // Kosongkan input setelah menjawab
+  document.getElementById("answer").value = "";
 }

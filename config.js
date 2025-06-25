@@ -1,6 +1,6 @@
 // config.js
 const quizData = {
-  question: "Rais",
-  answer: "Rais",
+  question: "Peler",
+  answer: "Peler",
   rewardLink: "https://google.com/hadiahnya"
 };

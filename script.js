@@ -17,17 +17,20 @@ window.onload = () => {
 
 function checkAnswer() {
   const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
-  const correctAnswer = quizData.answer.trim().toLowerCase();
-
   const notice = document.getElementById("notice");
   const reward = document.getElementById("reward");
 
-  if (userAnswer === correctAnswer) {
+  // ✅ Normalisasi jawaban benar sebagai array
+  const correctAnswers = Array.isArray(quizData.answer)
+    ? quizData.answer.map(a => a.trim().toLowerCase())
+    : [quizData.answer.trim().toLowerCase()];
+
+  if (correctAnswers.includes(userAnswer)) {
     notice.innerText = "";
     reward.style.display = "block";
     reward.innerHTML = `
-      🎉 GOKS! Click the following link for your prize:
-      <br><a href="${quizData.rewardLink}" target="_blank">🎁 TAKE A PRIZE</a>
+      🎉 Selamat! Klik link berikut untuk hadiahmu:
+      <br><a href="${quizData.rewardLink}" target="_blank">🎁 Ambil Hadiah</a>
     `;
   } else {
     reward.style.display = "none";
@@ -36,4 +39,3 @@ function checkAnswer() {
     notice.style.color = "red";
     notice.style.fontWeight = "bold";
   }
-}

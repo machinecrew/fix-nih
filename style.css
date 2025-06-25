@@ -8,6 +8,7 @@ body {
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #333;
@@ -57,10 +58,11 @@ input[type="text"]:focus {
 }
 
 .btn-submit {
+  display: block;
+  margin: 20px auto 10px auto;
   background: linear-gradient(90deg, #00C9FF, #92FE9D);
   padding: 12px 25px;
   font-size: 16px;
-  margin-top: 20px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -73,6 +75,14 @@ input[type="text"]:focus {
 .btn-submit:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(0, 201, 255, 0.7);
+}
+
+/* ✅ CREDIT STYLING */
+.credit {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555;
 }
 
 .notice {
@@ -100,14 +110,4 @@ input[type="text"]:focus {
 
 .reward a:hover {
   text-decoration: underline;
-}
-
-/* ✅ CREDIT STYLE */
-.credit {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-  color: #444;
-  font-weight: 500;
-  opacity: 0.6;
 }

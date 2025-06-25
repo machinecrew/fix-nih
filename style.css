@@ -101,3 +101,12 @@ input[type="text"]:focus {
 .reward a:hover {
   text-decoration: underline;
 }
+
+.credit {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #444;
+  font-weight: 500;
+  opacity: 0.7;
+}

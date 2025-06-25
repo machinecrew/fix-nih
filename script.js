@@ -13,7 +13,7 @@ function checkAnswer() {
     reward.style.display = "block";
     reward.innerHTML = `🎁 GOKS! Ambil dah di sini: <a href="${quizData.rewardLink}" target="_blank">Ambil Hadiah</a>`;
   } else {
-    notice.innerText = "Jawaban Salah!";
+    notice.innerText = "Salah Cok!";
     notice.style.display = "block";
     reward.style.display = "none";
   }

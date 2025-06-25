@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Tebakan Hadiah</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Kuis Tebak-Tebakan 🎉</h1>
+    <p id="question">Memuat pertanyaan...</p>
+    <input type="text" id="answer" placeholder="Tulis jawabanmu..." />
+    <button class="btn-submit" onclick="checkAnswer()">Kirim Jawaban</button>
+    <div class="notice" id="notice"></div>
+    <div class="reward" id="reward"></div>
+  </div>
+
+  <!-- Script -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

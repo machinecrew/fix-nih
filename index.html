@@ -9,20 +9,21 @@
 <body>
   <div class="quiz-container">
     <h1>QUIZZ-QUIZZAN 🎉</h1>
-    <h1>Clue: Telpon Berdering</h1>
+
     <p id="question">Memuat pertanyaan...</p>
+    <p id="clue" class="clue-text"></p> <!-- Clue -->
+
     <input type="text" id="answer" placeholder="Ketik jawaban lo..." />
     <button class="btn-submit" onclick="checkAnswer()">Kirim Jawaban</button>
 
-    <!-- ✅ CREDIT DI BAWAH TOMBOL -->
     <p class="credit">© By CB.GIBRAN</p>
 
     <div class="notice" id="notice"></div>
     <div class="reward" id="reward"></div>
   </div>
 
-  <!-- ✅ Config harus lebih dulu -->
-  <script src="config.js?v=20250625_04"></script>
+  <!-- Pastikan config.js di-load lebih dulu -->
+  <script src="config.js?v=20250625_05"></script>
   <script src="script.js"></script>
 </body>
 </html>

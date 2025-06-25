@@ -1,6 +1,6 @@
 // config.js
 const quizData = {
-  question: "Apa yang selalu naik tapi tidak pernah turun?",
-  answer: "umur",
-  rewardLink: "https://linkhadiah.com/hadiahnya"
+  question: "Nama Panjang Nadzif?",
+  answer: "Nadzif Al Aqol",
+  rewardLink: "https://dana.com/hadiahnya"
 };

@@ -1,22 +1,20 @@
-// Tampilkan pertanyaan
-document.getElementById("question").textContent = quizConfig.question;
+// script.js
+window.onload = () => {
+  document.getElementById("question").innerText = quizData.question;
+};
 
 function checkAnswer() {
   const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
   const notice = document.getElementById("notice");
-  const rewardBox = document.getElementById("reward");
+  const reward = document.getElementById("reward");
 
-  // Reset tampilan
-  notice.style.display = "none";
-  rewardBox.style.display = "none";
-
-  if (quizConfig.answers.includes(userAnswer)) {
-    // Jawaban benar
-    rewardBox.innerHTML = `🎉 Selamat! Jawabanmu benar.<br><a href="${quizConfig.rewardLink}" target="_blank">Klik untuk klaim hadiah</a>`;
-    rewardBox.style.display = "block";
+  if (userAnswer === quizData.answer.toLowerCase()) {
+    notice.style.display = "none";
+    reward.style.display = "block";
+    reward.innerHTML = `🎁 Selamat! Klik hadiahmu di sini: <a href="${quizData.rewardLink}" target="_blank">Ambil Hadiah</a>`;
   } else {
-    // Jawaban salah
-    notice.textContent = "Jawaban Salah!";
+    notice.innerText = "Jawaban Salah!";
     notice.style.display = "block";
+    reward.style.display = "none";
   }
 }

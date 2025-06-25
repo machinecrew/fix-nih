@@ -11,7 +11,7 @@ function checkAnswer() {
   if (userAnswer === quizData.answer.toLowerCase()) {
     notice.style.display = "none";
     reward.style.display = "block";
-    reward.innerHTML = `🎁 GG! Ambil dah di sini: <a href="${quizData.rewardLink}" target="_blank">Ambil Hadiah</a>`;
+    reward.innerHTML = `🎁 GOKS! Ambil dah di sini: <a href="${quizData.rewardLink}" target="_blank">Ambil Hadiah</a>`;
   } else {
     notice.innerText = "Jawaban Salah!";
     notice.style.display = "block";

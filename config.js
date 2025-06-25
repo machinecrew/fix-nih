@@ -1,6 +1,6 @@
-// Konfigurasi soal dan jawaban
-const quizConfig = {
+// config.js
+const quizData = {
   question: "Apa yang selalu naik tapi tidak pernah turun?",
-  answers: ["umur", "usia"],
-  rewardLink: "https://example.com/hadiah" // ganti dengan link hadiah kamu
+  answer: "umur",
+  rewardLink: "https://linkhadiah.com/hadiahnya"
 };

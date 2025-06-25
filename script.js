@@ -1,16 +1,17 @@
-// script.js
-
-// 🔍 Cek apakah quizData berhasil dimuat
+// Debug: pastikan config sudah dimuat
 console.log("Isi dari quizData:", quizData);
 
 window.onload = () => {
-  // Tampilkan pertanyaan dari config.js
   const questionEl = document.getElementById("question");
+  const clueEl = document.getElementById("clue");
+
   if (quizData && quizData.question) {
     questionEl.innerText = quizData.question;
+    clueEl.innerText = "Clue: " + (quizData.clue || "Tidak ada petunjuk.");
   } else {
     questionEl.innerText = "Pertanyaan gagal dimuat.";
-    console.error("quizData tidak ditemukan atau kosong.");
+    clueEl.innerText = "";
+    console.error("quizData tidak ditemukan.");
   }
 };
 
@@ -22,15 +23,13 @@ function checkAnswer() {
   const reward = document.getElementById("reward");
 
   if (userAnswer === correctAnswer) {
-    // Jawaban benar
     notice.innerText = "";
     reward.style.display = "block";
     reward.innerHTML = `
-      🎉 Selamat! Klik link berikut untuk hadiahmu:
-      <br><a href="${quizData.rewardLink}" target="_blank">🎁 Ambil Hadiah</a>
+      🎉 GOKS! Click the following link for your prize:
+      <br><a href="${quizData.rewardLink}" target="_blank">🎁 TAKE A PRIZE</a>
     `;
   } else {
-    // Jawaban salah
     reward.style.display = "none";
     notice.innerText = "Jawaban Salah!";
     notice.style.display = "block";

@@ -30,8 +30,8 @@ function checkAnswer() {
     notice.innerText = "";
     reward.style.display = "block";
     reward.innerHTML = `
-      🎉 Selamat! Klik link berikut untuk hadiahmu:
-      <br><a href="${quizData.rewardLink}" target="_blank">🎁 Ambil Hadiah</a>
+      🎉 GOKS! Sikaaat dahhhh:
+      <br><a href="${quizData.rewardLink}" target="_blank">🎁 Get Reward</a>
     `;
   } else {
     // ❌ Jawaban salah

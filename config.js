@@ -1,7 +1,7 @@
 // config.js
 const quizData = {
-  question: "Sekarang kita di Depok, 3 langkah lagi sampai Gorontalo, dari Gorontalo 3 langkah lagi sampai mana?",
-  answer: ["Jakarta", "Jambi", "Jogja", "Jatinangor", "Jombang", "Jember", "Jepara", "Jayapura" ], // ✔️ Semua ini dianggap benar
-  rewardLink: "https://app.u.shopeepay.co.id/u/AVYSe9bTgBmJXgGeivcmE",
+  question: "Start dari Malang, tiga langkah sampe Palembang, dari Palembang 3 langkah lagi dimana?",
+  answer: ["Surabaya", "Semarang", "Solo", "Serang", "Salatiga", "Sidoarjo", "Sibolga", "Sorong" ], // ✔️ Semua ini dianggap benar
+  rewardLink: "https://app.u.shopeepay.co.id/u/gWRarfhV18uP4ruVuXCQn",
   clue: "Tiga Langkah Sampai🚶"
 };

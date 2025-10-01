@@ -99,12 +99,13 @@
     const form = document.getElementById('reportForm');
     const messageDiv = document.getElementById('message');
 
-    // Ganti dengan URL Google Apps Script Web App kalian
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNWElV_Qw38dCnlZo3VTZN1ScXwPpsGpOta8S8CbsG/dev';
+    // Ganti dengan URL Web App Google Apps Script kamu
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYo8VbQAgL-LeroGdT3ZGabUg2eWgcNYck08SL2j3bgrhZ_ZaND_FIavlgcDlGyXU1rg/exec';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       messageDiv.style.display = 'none';
+
       const username = form.username.value.trim();
       const comment = form.comment.value.trim();
       const postLink = form.postLink.value.trim();
@@ -124,13 +125,17 @@
         const response = await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           body: formData,
+          mode: 'cors',
+          credentials: 'omit',
         });
 
-        if (response.ok) {
-          showMessage('Report berhasil dikirim! Terima kasih atas laporannya.', 'success');
+        const result = await response.json();
+
+        if (result.success) {
+          showMessage(result.message, 'success');
           form.reset();
         } else {
-          throw new Error('Gagal mengirim laporan');
+          showMessage(result.error || 'Terjadi kesalahan. Silakan coba lagi.', 'error');
         }
       } catch (error) {
         showMessage('Terjadi kesalahan. Silakan coba lagi.', 'error');

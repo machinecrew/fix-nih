@@ -1,180 +1,147 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report System</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #7289da, #99aab5);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #333;
-        }
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-        h1 {
-            color: #7289da;
-            margin-bottom: 30px;
-            font-size: 24px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            text-align: left;
-            color: #555;
-        }
-        input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
-        }
-        input[type="text"]:focus, input[type="number"]:focus {
-            border-color: #7289da;
-            outline: none;
-        }
-        button {
-            background: #7289da;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-            width: 100%;
-        }
-        button:hover {
-            background: #5b6eae;
-        }
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-        .message {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-        .success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        .loading {
-            display: none;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TikTok Report Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #764ba2;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1.5px solid #ccc;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: linear-gradient(135deg, #5a6ddf, #653d9a);
+    }
+    .message {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+    }
+    .message.success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .message.error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔍 Report System YGTW</h1>
-        <form id="reportForm">
-            <label for="username">Username:</label>
-            <input type="text" id="username" required placeholder="Masukkan username Anda">
+  <div class="container">
+    <h1>TikTok Report</h1>
+    <form id="reportForm">
+      <label for="username">Username TikTok Kalian</label>
+      <input type="text" id="username" name="username" placeholder="@username_kalian" required />
 
-            <label for="serverId">Server ID:</label>
-            <input type="text" id="serverId" required placeholder="Masukkan Server ID">
+      <label for="comment">Isi Komentar Kalian</label>
+      <textarea id="comment" name="comment" placeholder="Jelaskan detail laporan..." required></textarea>
 
-            <button type="submit">Kirim Report</button>
-        </form>
-        <div id="loading" class="loading">Mengirim report...</div>
-        <div id="message"></div>
-    </div>
+      <label for="postLink">Link Postingan</label>
+      <input type="url" id="postLink" name="postLink" placeholder="https://www.tiktok.com/..." required />
 
-    <script>
-        const form = document.getElementById('reportForm');
-        const loading = document.getElementById('loading');
-        const message = document.getElementById('message');
-        const webhookUrl = 'https://discord.com/api/webhooks/1421585680554790963/ayz4TZG9l-VgmoEa_CN1rr1qVN4P1FBJ7gNpkNVoS6iQdFgk8uQqv4ljpJqOYa4iPwK-'; // GANTI DENGAN WEBHOOK URL DISCORD ANDA!
+      <button type="submit">Send Report</button>
+    </form>
+    <div id="message" class="message"></div>
+  </div>
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username').value.trim();
-            const serverId = document.getElementById('serverId').value.trim();
+  <script>
+    const form = document.getElementById('reportForm');
+    const messageDiv = document.getElementById('message');
 
-            if (!username || !serverId) {
-                showMessage('Mohon isi semua field!', 'error');
-                return;
-            }
+    // Ganti dengan URL Google Apps Script Web App kalian
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNWElV_Qw38dCnlZo3VTZN1ScXwPpsGpOta8S8CbsG/dev';
 
-            // Format tanggal dan jam
-            const now = new Date();
-            const timestamp = now.toLocaleString('id-ID', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      messageDiv.style.display = 'none';
+      const username = form.username.value.trim();
+      const comment = form.comment.value.trim();
+      const postLink = form.postLink.value.trim();
 
-            // Data untuk Discord Embed
-            const embed = {
-                title: '📋 New Report Diterima!',
-                color: 3447003, // Warna biru Discord
-                fields: [
-                    { name: 'Username', value: username, inline: true },
-                    { name: 'Server ID', value: serverId, inline: true },
-                    { name: 'Waktu Report', value: timestamp, inline: false }
-                ],
-                footer: { text: 'Report System' },
-                timestamp: now.toISOString()
-            };
+      if (!postLink.includes('tiktok.com')) {
+        showMessage('Silakan masukkan URL TikTok yang valid!', 'error');
+        return;
+      }
 
-            loading.style.display = 'block';
-            form.style.display = 'none'; // Sembunyikan form saat loading
-            message.innerHTML = ''; // Reset message
+      try {
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('comment', comment);
+        formData.append('postLink', postLink);
+        formData.append('timestamp', new Date().toLocaleString('id-ID'));
 
-            try {
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ embeds: [embed] })
-                });
-
-                if (response.ok) {
-                    showMessage('Report berhasil dikirim ke Discord!', 'success');
-                    form.reset(); // Reset form
-                } else {
-                    throw new Error('Gagal mengirim ke Discord');
-                }
-            } catch (error) {
-                showMessage('Error: ' + error.message + '. Pastikan webhook URL benar.', 'error');
-            } finally {
-                loading.style.display = 'none';
-                form.style.display = 'block'; // Tampilkan kembali form
-            }
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          body: formData,
         });
 
-        function showMessage(text, type) {
-            message.innerHTML = `<div class="message ${type}">${text}</div>`;
+        if (response.ok) {
+          showMessage('Report berhasil dikirim! Terima kasih atas laporannya.', 'success');
+          form.reset();
+        } else {
+          throw new Error('Gagal mengirim laporan');
         }
-    </script>
+      } catch (error) {
+        showMessage('Terjadi kesalahan. Silakan coba lagi.', 'error');
+      }
+    });
+
+    function showMessage(text, type) {
+      messageDiv.textContent = text;
+      messageDiv.className = 'message ' + type;
+      messageDiv.style.display = 'block';
+    }
+  </script>
 </body>
 </html>

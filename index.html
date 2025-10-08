@@ -1,160 +1,387 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TikTok Report Form</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
-    }
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #764ba2;
-      margin-bottom: 20px;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #333;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 6px;
-      border-radius: 10px;
-      border: 1.5px solid #ccc;
-      font-size: 1rem;
-      resize: vertical;
-    }
-    button {
-      margin-top: 25px;
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border: none;
-      border-radius: 12px;
-      color: white;
-      font-weight: bold;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background: linear-gradient(135deg, #5a6ddf, #653d9a);
-    }
-    .message {
-      margin-top: 20px;
-      padding: 12px;
-      border-radius: 12px;
-      font-weight: 600;
-      text-align: center;
-      display: none;
-    }
-    .message.success {
-      background-color: #d4edda;
-      color: #155724;
-    }
-    .message.error {
-      background-color: #f8d7da;
-      color: #721c24;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basur Picker Name - By Gibzz</title>
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Black Glass Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            margin: 10px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #ffffff, #a8a8a8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+        }
+
+        /* Main Container - Responsif Grid */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Config Panel */
+        .config-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 1em;
+            backdrop-filter: blur(10px);
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .name-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .name-item {
+            padding: 8px;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .remove-btn {
+            background: #ff4757;
+            padding: 5px 10px;
+            font-size: 0.8em;
+        }
+
+        /* Picker Area */
+        .picker-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .picker-display {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .picker-display.spinning {
+            animation: spinGlow 0.1s linear infinite;
+        }
+
+        @keyframes spinGlow {
+            0% { 
+                transform: rotate(0deg);
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+            }
+            100% { 
+                transform: rotate(360deg);
+                box-shadow: 0 0 40px rgba(118, 75, 162, 0.8);
+            }
+        }
+
+        .picker-display.winner {
+            animation: celebrate 1s ease-out;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            box-shadow: 0 0 50px rgba(255, 107, 107, 0.7);
+        }
+
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .start-btn {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #ff6b6b 0%, #4ecdc4 100%);
+        }
+
+        /* Footer untuk Copyright */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        footer p {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+            opacity: 0.8;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .picker-display {
+                height: 150px;
+                font-size: 1.5em;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            footer {
+                margin-top: 15px;
+                padding: 10px;
+            }
+        }
+
+        /* Scrollbar Custom */
+        .name-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .name-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .name-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>TikTok Report</h1>
-    <form id="reportForm">
-      <label for="username">Username TikTok Kalian</label>
-      <input type="text" id="username" name="username" placeholder="@username_kalian" required />
+    <header>
+        <h1>Random Name Picker</h1>
+        <p>Elegan Black Glass UI - Pilih Pemenang dengan Animasi Keren!</p>
+    </header>
 
-      <label for="comment">Isi Komentar Kalian</label>
-      <textarea id="comment" name="comment" placeholder="Jelaskan detail laporan..." required></textarea>
+    <div class="main-container">
+        <!-- Config Panel -->
+        <div class="glass config-panel">
+            <h2>Masukan Nama</h2>
+            <div class="input-group">
+                <input type="text" id="nameInput" placeholder="Masukkan nama baru..." maxlength="50">
+                <button onclick="addName()">Tambah</button>
+            </div>
+            <div class="name-list" id="nameList"></div>
+            <button onclick="clearAll()" id="clearBtn" style="background: #ff4757;">Hapus Semua</button>
+            <button onclick="loadNames()">Muat dari Storage</button>
+        </div>
 
-      <label for="postLink">Link Postingan</label>
-      <input type="url" id="postLink" name="postLink" placeholder="https://www.tiktok.com/..." required />
+        <!-- Picker Area -->
+        <div class="glass picker-area">
+            <h2>Picker Basur</h2>
+            <div class="picker-display" id="pickerDisplay">Klik "Mulai" untuk memulai!</div>
+            <button class="start-btn" onclick="startRandom()" id="startBtn" disabled>Mulai Acak</button>
+        </div>
+    </div>
 
-      <button type="submit">Send Report</button>
-    </form>
-    <div id="message" class="message"></div>
-  </div>
+    <!-- Footer Copyright -->
+    <footer class="glass">
+        <p>&copy; by GIBZZ - 2025</p>
+    </footer>
 
-  <script>
-    const form = document.getElementById('reportForm');
-    const messageDiv = document.getElementById('message');
+    <script>
+        let names = JSON.parse(localStorage.getItem('names')) || [];
+        let intervalId = null;
+        let isSpinning = false;
 
-    // Ganti dengan URL Web App Google Apps Script kamu
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWv6ca2xC3OqtHVqCLtpCc0mU_6gND8olGse3_PgeQ7bxPyh2uSFiKUSvWk8_mEdVg3w/exec';
+        const nameInput = document.getElementById('nameInput');
+        const nameList = document.getElementById('nameList');
+        const pickerDisplay = document.getElementById('pickerDisplay');
+        const startBtn = document.getElementById('startBtn');
+        const clearBtn = document.getElementById('clearBtn');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      messageDiv.style.display = 'none';
+        // Render list nama
+        function renderNames() {
+            nameList.innerHTML = '';
+            names.forEach((name, index) => {
+                const item = document.createElement('div');
+                item.className = 'name-item';
+                item.innerHTML = `
+                    <span>${name}</span>
+                    <button class="remove-btn" onclick="removeName(${index})">Hapus</button>
+                `;
+                nameList.appendChild(item);
+            });
+            updateButtons();
+            saveNames();
+        }
 
-      const username = form.username.value.trim();
-      const comment = form.comment.value.trim();
-      const postLink = form.postLink.value.trim();
+        // Tambah nama
+        function addName() {
+            const name = nameInput.value.trim();
+            if (name && !names.includes(name)) {
+                names.push(name);
+                nameInput.value = '';
+                renderNames();
+            }
+        }
 
-      if (!postLink.includes('tiktok.com')) {
-        showMessage('Silakan masukkan URL TikTok yang valid!', 'error');
-        return;
-      }
+        // Hapus nama
+        function removeName(index) {
+            names.splice(index, 1);
+            renderNames();
+        }
 
-      try {
-        const formData = new FormData();
-        formData.append('username', username);
-        formData.append('comment', comment);
-        formData.append('postLink', postLink);
-        formData.append('timestamp', new Date().toLocaleString('id-ID'));
+        // Hapus semua
+        function clearAll() {
+            if (confirm('Hapus semua nama?')) {
+                names = [];
+                renderNames();
+            }
+        }
 
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          body: formData,
-          mode: 'cors',
-          credentials: 'omit',
+        // Update tombol
+        function updateButtons() {
+            startBtn.disabled = names.length === 0;
+            clearBtn.disabled = names.length === 0;
+        }
+
+        // Simpan ke localStorage
+        function saveNames() {
+            localStorage.setItem('names', JSON.stringify(names));
+        }
+
+        // Muat dari localStorage (sudah dilakukan di awal)
+        function loadNames() {
+            renderNames(); // Refresh jika diperlukan
+        }
+
+        // Mulai random
+        function startRandom() {
+            if (isSpinning || names.length === 0) return;
+
+            isSpinning = true;
+            startBtn.disabled = true;
+            pickerDisplay.textContent = '';
+            pickerDisplay.classList.add('spinning');
+            pickerDisplay.classList.remove('winner');
+
+            let spinCount = 0;
+            const maxSpins = 50 + Math.random() * 50; // Acak durasi
+
+            intervalId = setInterval(() => {
+                const randomName = names[Math.floor(Math.random() * names.length)];
+                pickerDisplay.textContent = randomName;
+
+                spinCount++;
+                if (spinCount >= maxSpins) {
+                    clearInterval(intervalId);
+                    const winner = names[Math.floor(Math.random() * names.length)];
+                    pickerDisplay.textContent = `🎉 Basur Kita: ${winner} 🎉`;
+                    pickerDisplay.classList.remove('spinning');
+                    pickerDisplay.classList.add('winner');
+                    isSpinning = false;
+                    startBtn.disabled = false;
+                }
+            }, 100); // Kecepatan spin
+        }
+
+        // Event listeners
+        nameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addName();
         });
 
-        const text = await response.text();
-        console.log('Response text:', text);
-
-        if (!response.ok) {
-          throw new Error('HTTP error ' + response.status);
-        }
-
-        const result = JSON.parse(text);
-
-        if (result.success) {
-          showMessage(result.message, 'success');
-          form.reset();
-        } else {
-          showMessage(result.error || 'Terjadi kesalahan. Silakan coba lagi.', 'error');
-        }
-      } catch (error) {
-        console.error('Fetch error:', error);
-        showMessage('Terjadi kesalahan. Silakan coba lagi.', 'error');
-      }
-    });
-
-    function showMessage(text, type) {
-      messageDiv.textContent = text;
-      messageDiv.className = 'message ' + type;
-      messageDiv.style.display = 'block';
-    }
-  </script>
+        // Inisialisasi
+        renderNames();
+    </script>
 </body>
 </html>
